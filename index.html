@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Site Scraper!</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="src/css/material.min.css">
+  <link rel="stylesheet" href="src/css/main.css">
+
+</head>
+<body>
+
+  <!-- Always shows a header, even in smaller screens. -->
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">SS</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. We hide it in small screens. -->
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <!--a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a-->
+            </nav>
+          </div>
+        </header>
+        <div class="mdl-layout__drawer">
+          <span class="mdl-layout-title">Site Scraper</span>
+          <nav id="main_nav" class="mdl-navigation">
+            <a class="mdl-navigation__link" id="go_guide" href="#"><i class="material-icons">description</i> Guide</a>
+            <a class="mdl-navigation__link" id="go_parser" href="#"><i class="material-icons">find_replace</i> Parser</a>
+            <a class="mdl-navigation__link" id="go_help" href="#"><i class="material-icons">help_outline</i> Help</a>
+          </nav>
+        </div>
+        <main class="mdl-layout__content">
+          <div class="page-content">
+            <!-- Your content goes here -->
+
+
+
+            <section id="getstart">
+
+              <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--4-col first-page">
+                  <div class="triple"></div>
+                  <h3>Accurate</h3>
+                  <p>Use components maintained by Google engineers and designers</p>
+                </div>
+                <div class="mdl-cell mdl-cell--4-col first-page">
+                  <div class="triple"></div>
+                  <h3>User Friendly</h3>
+                  <p>Use components maintained by Google engineers and designers</p>
+                </div>
+                <div class="mdl-cell mdl-cell--4-col first-page">
+                  <div class="triple"></div>
+                  <h3>Open source</h3>
+                  <p>Use components maintained by Google engineers and designers</p>
+                </div>
+              </div>
+
+              <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--12-col first-page">
+                  <a class="start-button" href="#">Get Start</a>
+                </div>
+
+              </div>
+
+
+
+
+            </section>
+
+
+
+
+
+            <section id="parser" style="display: none;">
+              <div class="mdl-grid">
+
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet input-date">
+                  <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                    <div class="mdl-tabs__tab-bar">
+                      <a href="#link-panel" class="mdl-tabs__tab is-active">One link</a>
+                      <a href="#links-panel" class="mdl-tabs__tab">Many links</a>
+                    </div>
+
+
+                    <div class="mdl-tabs__panel is-active" id="link-panel">
+                      <div>
+                        <label for="expando1">
+                          <span></span>
+                        </label>
+                        <div>
+                          <input type="text" id="expando1">
+                          <label for="expando1">www</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mdl-tabs__panel" id="links-panel">
+                      <div class="mdl-textfield mdl-js-textfield">
+                        <textarea class="mdl-textfield__input" style="width: 100%;" type="text" rows="3" maxrows="6"
+                        id="schools"></textarea>
+                        <label class="mdl-textfield__label" for="schools">Push array of lincks</label>
+                      </div>
+                    </div>
+
+                  <button id="startparse" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">scrap</button>
+
+                  </div>
+                </div>
+
+
+                <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet input-date">
+                  <h5>Add CSS selectors for elements what you want scrap.</h5>
+
+                  <p>Enter parent container</p>
+                  <input type="text" id="expando-mode-parent">
+                  <label for="expando-mode-parent">parent selector (exaple: 'body' or 'html' or some Css selector)</label>
+                  <br>
+                  <br>
+
+
+                  <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet input-date">
+                  <button id="add" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                    <i class="material-icons">add</i>
+                  </button>
+                    <input type="text" id="expando-mode-parent1">
+                    <label for="expando-mode-parent1">name</label>
+                    <input type="text" id="expando-mode-parent2">
+                    <label for="expando-mode-parent2">selector</label>
+                  </div>
+
+
+
+                  <div id="listcss">
+                  <form id="scrapform"> 
+                      <ul class="demo-list-icon mdl-list">
+                        <!--li class="mdl-list__item gruop-input">
+                          <input type="text" id="expando-mode">
+                          <label for="expando-mode">Expandable text field</label>
+                        </li-->
+                      </ul>
+                    </form>
+                  </div>
+
+                </div>
+
+
+
+                <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone input-date">
+                  <table style="display: none;" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Material</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+                        <td>25</td>
+                        <td>$2.90</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <button id="scrap" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                    Button
+                  </button>
+                </div>
+              </div>
+
+
+<div class="mdl-cell mdl-cell--12-col mdl-cell--6-col-phone input-date">
+Scrap result
+<pre id="resulrjson">
+  
+</pre>
+  </div>
+
+            </section>
+
+
+
+
+
+            <section id="help" style="display: none; background-color: green;"></section>
+
+
+
+
+
+          </div>
+        </main>
+      </div>
+
+
+    </body>
+
+    <script>
+    // You can also require other files to run in this process
+    require('./renderer.js');
+    require('./src/js/material.min.js');
+  </script>
+
+
+
+
+
+
+
+
+  </html>
