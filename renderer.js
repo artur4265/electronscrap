@@ -19,11 +19,16 @@ scraperjs.StaticScraper.create('https://news.ycombinator.com/')
 */
 
 
-var path = require('path')
-var read = require('fs').readFileSync
+var path = require('path');
+var fs = require('fs');
+var stream = require('stream');
+//var read = require('fs').readFileSync;
 var Xray = require('x-ray');
 var serialize = require('form-serialize');
 var x = Xray();
+
+var wstream = fs.createWriteStream('myOutput.json');
+
 
 window.$ = window.jQuery = require('jquery');
 
@@ -80,6 +85,15 @@ var names, selects, newField;
 
 
 
+
+
+
+
+
+
+
+
+
 $('button#add').on('click', function() {
 
 	name = $('#expando-mode-parent1').val();
@@ -89,22 +103,43 @@ $('button#add').on('click', function() {
 	<li class="mdl-list__item gruop-input">
 	<label >Scraping field <span class="liname">${name}</span></label>
 	<input type="text" name="${name}" value="${selects}">
-	<span class="lidell">X</span>
+
+
+	<label class="array_on-lable">
+	<input class="array_on" type="checkbox">
+	<span class="mdl-checkbox__label">arr</span>
+	</label>
+
+	<span class="lidell">Delete</span>
+
+
+
 	</li>`;
 
-	$(newField).appendTo( $('#scrapform ul') );
+	$(newField).appendTo( $('#scrapform > ul') );
 
 
 	$('li.gruop-input .lidell').on('click', function() {
-		$(this).parent('li.gruop-input').detach();
+		$(this).parents('li.gruop-input').detach();
 	});
 
 	$('#expando-mode-parent1').val('');
 	$('#expando-mode-parent2').val('');
 
 
+
+$('.array_on').on('change', function() {
+    if(this.checked) {
+		var arrname = $(this).parent('.array_on-lable').prev().attr('name');
+		$(this).parent('.array_on-lable').prev().attr('name', arrname+'[]');
+    } else {
+    	var arrname1 = $(this).parent('.array_on-lable').prev().prev().find('.liname').text();
+       $(this).parent('.array_on-lable').prev().attr('name', arrname1);
+    }
 });
 
+
+});
 
 
 
@@ -116,9 +151,18 @@ var obj;
 
 $('button#startparse').on('click', function() {
 
+
+// 1 link
+
+if ($('input#expando1').val() != '') {
+
+
 	url = $('input#expando1').val();
 	cssParentSelector = $('input#expando-mode-parent').val();
 	obj = serialize(form, { hash: true });
+	console.log(obj);
+
+
 
 	if (obj == '') {
 
@@ -143,6 +187,72 @@ $('button#startparse').on('click', function() {
 	}
 
 	obj = '';
+
+// more links
+} else if($('input#expando1').val() == ''&& $('#schools').val()!='') {
+
+
+	url = $('#schools').val().split(', ');
+	
+
+
+url.forEach(function(link, ind) {
+
+	
+	cssParentSelector = $('input#expando-mode-parent').val();
+	obj = serialize(form, { hash: true });
+	console.log(obj);
+
+
+
+	if (obj == '') {
+
+		x(link, cssParentSelector)(function(err, data) {
+			if (data!='') {
+  			console.log(data); //
+  			resulrjson.innerHTML = data;
+  		} else {
+			console.log(err); //
+		}
+	});
+
+	} else {
+		x(link, cssParentSelector, [obj])(function(err, data) {
+			if (data!='') {
+  			console.log(data); //
+  		} else {
+			console.log(err); //
+		}
+	})
+  		.write('result.json');
+
+		var text = fs.readFileSync('result.json', 'utf8');
+
+		fs.open('myOutput.json', "a+", 0777, function(err, file_handle) {
+			if (!err) {
+			    fs.write(file_handle, text+'\n', null, 'utf8', function(err, written) {
+			        if (!err) {
+			            console.log("Текст успешно записан в файл");
+			        } else {
+			            console.log("Произошла ошибка при записи");
+			        }
+			    });
+			} else {
+				console.log("Произошла ошибка при открытии");
+			}
+		});
+
+	}
+
+	obj = '';
+
+
+});
+
+
+
+
+}
 
 
 });
